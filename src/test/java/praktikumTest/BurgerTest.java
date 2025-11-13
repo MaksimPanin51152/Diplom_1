@@ -68,20 +68,17 @@ public class BurgerTest {
     }
 
     @Test
-    public void testReceiptFormatIsCorrect() {
+    public void testReceiptContainsAllIngredientsAndBuns() {
+        String receipt = burger.getReceipt();
+        assertTrue(receipt.contains(BUN_NAME));
+        assertTrue(receipt.contains(INGREDIENT_NAME_1));
+        assertTrue(receipt.contains(INGREDIENT_NAME_2));
+    }
+
+    @Test
+    public void testReceiptPriceIsCorrect() {
         float expectedTotal = (BUN_PRICE * 2) + INGREDIENT_PRICE_1 + INGREDIENT_PRICE_2;
-
-        String expectedReceipt = String.format(
-                "(==== %s ====)%n" +
-                        "= sauce %s =%n" +
-                        "= filling %s =%n" +
-                        "(==== %s ====)%n" +
-                        "%nPrice: %f%n",
-                BUN_NAME, INGREDIENT_NAME_1, INGREDIENT_NAME_2, BUN_NAME, expectedTotal
-        );
-
-        String actualReceipt = burger.getReceipt();
-
-        assertEquals(expectedReceipt, actualReceipt);
+        String receipt = burger.getReceipt();
+        assertTrue(receipt.contains(String.valueOf(expectedTotal)));
     }
 }

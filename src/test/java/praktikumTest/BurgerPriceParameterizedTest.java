@@ -7,13 +7,12 @@ import org.junit.runners.Parameterized;
 import praktikum.Burger;
 import praktikum.Bun;
 import praktikum.Ingredient;
-import praktikum.IngredientType;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 @RunWith(Parameterized.class)
 public class BurgerPriceParameterizedTest {
@@ -33,12 +32,23 @@ public class BurgerPriceParameterizedTest {
     private Ingredient ingredientMock1;
     private Ingredient ingredientMock2;
 
+    private static final float BUN_PRICE_100 = 100f;
+    private static final float BUN_PRICE_150 = 150f;
+    private static final float BUN_PRICE_200 = 200f;
+
+    private static final float INGREDIENT_PRICE_50 = 50f;
+    private static final float INGREDIENT_PRICE_100 = 100f;
+    private static final float INGREDIENT_PRICE_150 = 150f;
+
+    private static final float EXPECTED_PRICE_300 = 300f;
+    private static final float EXPECTED_PRICE_600 = 600f;
+
     @Parameterized.Parameters(name = "{index}: bun={0}, ingredient={1}, expected={2}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {100f, 50f, 300f},
-                {200f, 100f, 600f},
-                {150f, 150f, 600f}
+                {BUN_PRICE_100, INGREDIENT_PRICE_50, EXPECTED_PRICE_300},
+                {BUN_PRICE_200, INGREDIENT_PRICE_100, EXPECTED_PRICE_600},
+                {BUN_PRICE_150, INGREDIENT_PRICE_150, EXPECTED_PRICE_600}
         });
     }
 
